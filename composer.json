@@ -1,0 +1,16 @@
+{
+    "name": "crediborg/crediborg",
+    "type": "library",
+    "description": "PHP library for consuming CrediBorg APIs",
+    "keywords": ["php","crediborg"],
+    "homepage": "https://crediborg.cynobit.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Francis Ilechukwu",
+            "email": "francis94c@gmail.com",
+            "homepage": "https://francis94c.github.io",
+            "role": "Developer"
+        }
+    ]
+}
