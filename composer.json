@@ -2,7 +2,13 @@
     "name": "cynobit/crediborg-php-client",
     "type": "library",
     "description": "PHP library for consuming CrediBorg APIs",
-    "keywords": ["php","crediborg"],
+    "keywords": [
+        "php",
+        "crediborg",
+        "cynobit",
+        "transfer",
+        "payment"
+    ],
     "homepage": "https://crediborg.cynobit.com",
     "license": "MIT",
     "authors": [
@@ -14,7 +20,11 @@
         }
     ],
     "require": {
-        "php": ">=7.1.0"
+        "php": ">=7.1.3",
+        "vlucas/phpdotenv": "^3.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.0"
     },
     "autoload": {
         "psr-0": {
