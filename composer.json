@@ -1,5 +1,5 @@
 {
-    "name": "crediborg/crediborg",
+    "name": "cynobit/crediborg-php-client",
     "type": "library",
     "description": "PHP library for consuming CrediBorg APIs",
     "keywords": ["php","crediborg"],
