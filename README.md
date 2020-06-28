@@ -16,9 +16,34 @@ $ composer require cynobit/crediborg-php-client
 
 ### Create Invoice ###
 ```php
-$amount = 5000;
+$amount = 75000;
 
-$invoice = new CynoBit\CrediBorg\Invoice($amount);
+$secret = ".....";
+$token = "...";
 
-$invoice->setCode('AHYT645623')->setEmail('example@example.com');
+$invoice = new CrediBorg\Invoice($amount);
+
+$invoice->setCode('AHYT645623')
+            ->setEmail('example@example.com');
+            ->setCustomer([
+                'first_name' => 'John',
+                'last_name'  => 'Doe'
+            ])
+            ->setMetaData([
+                'items' => [
+                    [
+                        'name'       => 'Raspberry Pi'
+                        'qty'        => 2,
+                        'unit_price' => 25000
+                    ],
+                    [
+                        'name'       => 'ESP32 Module'
+                        'qty'        => 20,
+                        'unit_price' => 2000
+                    ]
+                ]
+            ]);
+$crediborg = new CrediBorg\CrediBorg($secret, $token);
+
+$crediborg->createInvoice($invoice);
 ```

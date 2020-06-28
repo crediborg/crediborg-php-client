@@ -161,7 +161,7 @@ class Invoice
         $body = ['amount' => $this->amount];
 
         if ($this->code)  $body['code'] = $this->code;
-        if ($this->metaData) $body['metadata'] = $this->metaData;
+        if ($this->metaData) $body['metadata'] = json_encode($this->metaData);
         if ($this->email) $body['email'] = $this->email;
         if ($this->customerId) $body['customer_id'] = $this->customerId;
 

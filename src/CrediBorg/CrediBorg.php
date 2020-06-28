@@ -55,6 +55,7 @@ class CrediBorg
             case 400:
                 throw new ValidationException($response->body->errors);
             default:
+            var_dump($response);
                 throw new Exception('Request Failed at Destinantion Server');
         }
     }
