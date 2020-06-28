@@ -2,10 +2,10 @@
 
 namespace CrediBorg;
 
+use Exception;
 use Unirest\Request;
 use Unirest\Request\Body;
 use CrediBorg\Exceptions\ValidationException;
-use Exception;
 
 class CrediBorg
 {
