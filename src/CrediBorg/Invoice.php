@@ -1,9 +1,15 @@
 <?php
 
-namespace CynoBit\CrediBorg;
+namespace CrediBorg;
 
 class Invoice
 {
+    /**
+     * Invoice ID
+     *
+     * @var int
+     */
+    private $id;
     /**
      * Amount Payable for this Invoice.
      *
@@ -23,7 +29,14 @@ class Invoice
      *
      * @var array
      */
-    private $customer = [];
+    private $customerData = [];
+
+    /**
+     * Customer's Email
+     *
+     * @var string
+     */
+    private $email;
 
     /**
      * Invoice Meta Data.
@@ -31,6 +44,13 @@ class Invoice
      * @var array
      */
     private $metaData;
+
+    /**
+     * Customer ID
+     *
+     * @var int
+     */
+    private $customerId;
 
     /**
      * Class Constructor
@@ -49,7 +69,7 @@ class Invoice
      * 
      * @return Invoice (Method Chaining)
      */
-    public function setCode(string $code):Invoice
+    public function setCode(string $code): Invoice
     {
         $this->code = $code;
         return $this;
@@ -65,9 +85,9 @@ class Invoice
      * 
      * @return Invoice (Method Chaining)
      */
-    public function setCustomer(array $customer):Invoice
+    public function setCustomer(array $customer): Invoice
     {
-        $this->customer = array_merge($this->customer, $customer);
+        $this->customerData = array_merge($this->customerData, $customer);
         return $this;
     }
 
@@ -80,9 +100,75 @@ class Invoice
      * 
      * @return Invoice (Method Chaining)
      */
-    public function setMetaData(array $metaData):Invoice
+    public function setMetaData(array $metaData): Invoice
     {
         $this->metaData = $metaData;
         return $this;
+    }
+
+    /**
+     * Customer ID
+     *
+     * @param integer $customerId Customer ID
+     * 
+     * @return Invoice (Method Chaining)
+     */
+    public function setCustomerId(int $customerId): Invoice
+    {
+        $this->customerId = $customerId;
+        return $this;
+    }
+
+    /**
+     * Get Invoice ID.
+     *
+     * @return integer
+     */
+    public function getId():int
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set Invoice ID.
+     *
+     * @param  integer $id
+     * @return Invoice
+     */
+    public function setId(int $id):Invoice
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * Get Invoice Amount.
+     *
+     * @return float Invoice Amount
+     */
+    public function getAmount(): float
+    {
+        return $this->amount;
+    }
+
+    /**
+     * Invoice Request Body.
+     *
+     * @return array
+     */
+    public function getBody(): array
+    {
+        $body = ['amount' => $this->amount];
+
+        if ($this->code)  $body['code'] = $this->code;
+        if ($this->metaData) $body['metadata'] = $this->metaData;
+        if ($this->email) $body['email'] = $this->email;
+        if ($this->customerId) $body['customer_id'] = $this->customerId;
+
+        if ($this->customerData['first_name'] ?? null) $body['first_name'] = $this->customerData['first_name'];
+        if ($this->customerData['middle_name'] ?? null) $body['middle_name'] = $this->customerData['middle_name'];
+        if ($this->customerData['last_name'] ?? null) $body['last_name'] = $this->customerData['last_name'];
+
+        return $body;
     }
 }
