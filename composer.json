@@ -28,7 +28,7 @@
     },
     "autoload": {
         "psr-0": {
-            "CynoBit\\CrediBorg": "src/CynoBit/CrediBorg/"
+            "CynoBit\\CrediBorg": "src/CrediBorg/"
         }
     }
 }
