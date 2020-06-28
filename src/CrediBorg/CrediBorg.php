@@ -82,7 +82,7 @@ class CrediBorg
     private function endpoint(string $endpoint): string
     {
         return (getenv('ENV') == 'cynobit_local' ?
-            'http://api.cynobit-app.com/crediborg/v1/' : 'https://api.cynobit-app.com/crediborg/v1/')
+            'http://api.cynobit-app.com/crediborg/v1/' : 'https://api.cynobit.com/crediborg/v1/')
             . $endpoint;
     }
 }
