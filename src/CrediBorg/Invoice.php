@@ -5,6 +5,13 @@ namespace CrediBorg;
 class Invoice
 {
     /**
+     * Invoice Payload (Used when Invoice object is initialized from a JSON object)
+     *
+     * @var object
+     */
+    private $payload;
+
+    /**
      * Invoice ID
      *
      * @var int
@@ -60,6 +67,18 @@ class Invoice
     public function __construct(float $amount)
     {
         $this->amount = $amount;
+    }
+
+    /**
+     * Invoice from JSON String.
+     *
+     * @param  string|null $json
+     * @return Invoice
+     */
+    public function fromJson(?string $json): Invoice
+    {
+        $this->payload = json_decode($json);
+        return $this;
     }
 
     /**
@@ -124,7 +143,7 @@ class Invoice
      *
      * @return integer
      */
-    public function getId():int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -135,7 +154,7 @@ class Invoice
      * @param  integer $id
      * @return Invoice
      */
-    public function setId(int $id):Invoice
+    public function setId(int $id): Invoice
     {
         $this->id = $id;
         return $this;
@@ -152,13 +171,24 @@ class Invoice
     }
 
     /**
+     * Magic Getter Method.
+     *
+     * @param  string $name
+     * @return void
+     */
+    public function __get($name)
+    {
+        return $this->payload->$name ?? null;
+    }
+
+    /**
      * Invoice Request Body.
      *
      * @return array
      */
     public function getBody(): array
     {
-        $body = ['amount' => $this->amount];
+        $body = ['amount' => $this->amount * 100];
 
         if ($this->code)  $body['code'] = $this->code;
         if ($this->metaData) $body['metadata'] = json_encode($this->metaData);
