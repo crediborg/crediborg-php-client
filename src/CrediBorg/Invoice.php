@@ -60,11 +60,18 @@ class Invoice
     private $customerId;
 
     /**
+     * Matched Transactions.
+     *
+     * @var array
+     */
+    private $matchedTransactions = [];
+
+    /**
      * Class Constructor
      *
-     * @param float $amount
+     * @param int $amount
      */
-    public function __construct(float $amount)
+    public function __construct(int $amount = 0)
     {
         $this->amount = $amount;
     }
@@ -79,6 +86,19 @@ class Invoice
     {
         $this->payload = json_decode($json);
         return $this;
+    }
+
+    /**
+     * Invoice from stdClass
+     *
+     * @param  object $invoice
+     * @return Invoice
+     */
+    public static function fromObject(object $invoice): Invoice
+    {
+        $instance = new Invoice();
+        $instance->payload = $invoice;
+        return $instance;
     }
 
     /**
@@ -179,6 +199,18 @@ class Invoice
     public function __get($name)
     {
         return $this->payload->$name ?? null;
+    }
+
+    /**
+     * Add Matched Transaction.
+     *
+     * @param  \CrediBorg\Transaction $transaction
+     * 
+     * @return void
+     */
+    public function addMatchedTransaction(Transaction $transaction): void
+    {
+        $this->matchedTransactions[] = $transaction;
     }
 
     /**

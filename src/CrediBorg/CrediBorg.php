@@ -5,6 +5,7 @@ namespace CrediBorg;
 use Exception;
 use Unirest\Request;
 use Unirest\Request\Body;
+use CrediBorg\EventPayload;
 use CrediBorg\Exceptions\ValidationException;
 
 class CrediBorg
@@ -55,9 +56,22 @@ class CrediBorg
             case 400:
                 throw new ValidationException($response->body->errors);
             default:
-            var_dump($response);
+                var_dump($response);
                 throw new Exception('Request Failed at Destinantion Server');
         }
+    }
+
+    /**
+     * Get Event Payload: Use to process payload sent by CrediBorg servers 
+     * as a Web Hook request.
+     *
+     * @param  null|Illuminate\Http\Request $request
+     * 
+     * @return EventPayload
+     */
+    public function getEventPayload($request = null): EventPayload
+    {
+        return new EventPayload(file_get_contents('php://input'));
     }
 
     /**
