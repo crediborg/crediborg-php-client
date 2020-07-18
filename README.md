@@ -24,26 +24,28 @@ $token = "...";
 $invoice = new CrediBorg\Invoice($amount);
 
 $invoice->setCode('AHYT645623')
-            ->setEmail('example@example.com');
-            ->setCustomer([
-                'first_name' => 'John',
-                'last_name'  => 'Doe'
-            ])
-            ->setMetaData([
-                'items' => [
-                    [
-                        'name'       => 'Raspberry Pi'
-                        'qty'        => 2,
-                        'unit_price' => 25000
-                    ],
-                    [
-                        'name'       => 'ESP32 Module'
-                        'qty'        => 20,
-                        'unit_price' => 2000
-                    ]
-                ]
-            ]);
+    ->setEmail('example@example.com');
+    ->setCustomer([
+        'first_name' => 'John',
+        'last_name'  => 'Doe'
+    ])
+    ->setMetaData([
+        'items' => [
+            [
+                'name'       => 'Raspberry Pi'
+                'qty'        => 2,
+                'unit_price' => 25000
+            ],
+            [
+                'name'       => 'ESP32 Module'
+                'qty'        => 20,
+                'unit_price' => 2000
+            ]
+        ]
+    ]);
 $crediborg = new CrediBorg\CrediBorg($secret, $token);
 
 $crediborg->createInvoice($invoice);
+
+echo $invoice->getCode(); // Invoice Code
 ```
