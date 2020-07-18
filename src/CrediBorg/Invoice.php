@@ -169,6 +169,16 @@ class Invoice
     }
 
     /**
+     * Get Invoice Code.
+     *
+     * @return string
+     */
+    public function getCode(): string
+    {
+        return $this->code;
+    }
+
+    /**
      * Set Invoice ID.
      *
      * @param  integer $id
@@ -211,6 +221,16 @@ class Invoice
     public function addMatchedTransaction(Transaction $transaction): void
     {
         $this->matchedTransactions[] = $transaction;
+    }
+
+    /**
+     * Get Matched Transactions
+     *
+     * @return array
+     */
+    public function getMatchedTransactions(): array
+    {
+        return $this->matchedTransactions;
     }
 
     /**

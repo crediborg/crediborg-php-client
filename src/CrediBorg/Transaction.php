@@ -32,7 +32,7 @@ class Transaction
     {
         $instance = new Transaction(null);
         $instance->payload = $transaction;
-        return $transaction;
+        return $instance;
     }
 
     /**

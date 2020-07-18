@@ -75,7 +75,7 @@ class EventPayload
             foreach ($transaction->invoices as $invoice) {
                 if (!in_array($invoice->id, $ids)) {
                     $ids[] = $invoice->id;
-                    $invoices = Invoice::fromObject($invoice);
+                    $invoices[] = Invoice::fromObject($invoice);
                     foreach ($this->get_associated_transactions($invoice->id) as $txs) {
                         $invoices[count($invoices) - 1]->addMatchedTransaction($txs);
                     }
