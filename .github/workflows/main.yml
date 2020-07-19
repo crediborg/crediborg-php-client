@@ -1,0 +1,27 @@
+name: build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:    
+    - uses: actions/checkout@v2
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v1
+      with:
+        php-version: '7.3'
+        extensions: mbstring, intl, pdo_mysql, gd, zip, sqlite
+        ini-values: post_max_size=256M, short_open_tag=On
+        coverage: pcov
+        tools: phpunit:8.2.3
+
+    - name: Composer Install Packages.
+      run: composer install
