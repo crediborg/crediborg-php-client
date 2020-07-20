@@ -55,8 +55,8 @@ class CrediBorg
                 return true;
             case 400:
                 throw new ValidationException($response->body->errors);
-            default:                
-                throw new Exception('Request Failed at Destinantion Server');
+            default:
+                throw new Exception("Request Failed at Destinantion Server with HTTP Code $response->code");
         }
     }
 
@@ -93,8 +93,8 @@ class CrediBorg
      */
     private function endpoint(string $endpoint): string
     {
-        return (getenv('ENV') == 'cynobit_local' ?
-            'http://api.cynobit-app.com/crediborg/v1/' : 'https://api.cynobit.com/crediborg/v1/')
+        return (getenv('ENV') == 'testing' ?
+            'http://localhost:9540/' : 'https://api.cynobit.com/crediborg/v1/')
             . $endpoint;
     }
 }

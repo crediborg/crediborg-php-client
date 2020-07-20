@@ -2,14 +2,16 @@
 
 namespace CrediBorg;
 
+use stdClass;
+
 class Invoice
 {
     /**
-     * Invoice Payload (Used when Invoice object is initialized from a JSON object)
+     * Invoice Payload. Contains All Invoice Fields.
      *
      * @var object
      */
-    private $payload;
+    private $data;
 
     /**
      * Invoice ID
@@ -17,19 +19,6 @@ class Invoice
      * @var int
      */
     private $id;
-    /**
-     * Amount Payable for this Invoice.
-     *
-     * @var float
-     */
-    private $amount;
-
-    /**
-     * Invoice Code.
-     *
-     * @var string
-     */
-    private $code;
 
     /**
      * Associative Array for Customer Details.
@@ -37,27 +26,6 @@ class Invoice
      * @var array
      */
     private $customerData = [];
-
-    /**
-     * Customer's Email
-     *
-     * @var string
-     */
-    private $email;
-
-    /**
-     * Invoice Meta Data.
-     *
-     * @var array
-     */
-    private $metaData;
-
-    /**
-     * Customer ID
-     *
-     * @var int
-     */
-    private $customerId;
 
     /**
      * Matched Transactions.
@@ -73,7 +41,9 @@ class Invoice
      */
     public function __construct(int $amount = 0)
     {
-        $this->amount = $amount;
+        $this->data = new stdClass();
+
+        $this->data->amount = $amount;
     }
 
     /**
@@ -84,7 +54,12 @@ class Invoice
      */
     public function fromJson(?string $json): Invoice
     {
-        $this->payload = json_decode($json);
+        $this->data = json_decode($json);
+
+        if ($this->data->first_name) $this->customerData['first_name'] = $this->data->first_name;
+        if ($this->data->middle_name) $this->customerData['middle_name'] = $this->data->middle_name;
+        if ($this->data->last_name) $this->customerData['last_name'] = $this->data->last_name;
+
         return $this;
     }
 
@@ -96,8 +71,13 @@ class Invoice
      */
     public static function fromObject(object $invoice): Invoice
     {
-        $instance = new Invoice();
-        $instance->payload = $invoice;
+        $instance = new static();
+        $instance->data = $invoice;
+
+        if ($instance->data->first_name) $instance->customerData['first_name'] = $instance->data->first_name;
+        if ($instance->data->middle_name) $instance->customerData['middle_name'] = $instance->data->middle_name;
+        if ($instance->data->last_name) $instance->customerData['last_name'] = $instance->data->last_name;
+
         return $instance;
     }
 
@@ -110,7 +90,7 @@ class Invoice
      */
     public function setCode(string $code): Invoice
     {
-        $this->code = $code;
+        $this->data->code = $code;
         return $this;
     }
 
@@ -131,6 +111,31 @@ class Invoice
     }
 
     /**
+     * Set Customer Email.
+     *
+     * @param  string $email
+     * @return Invoice
+     */
+    public function setEmail(string $email): Invoice
+    {
+        $this->data->email;
+        return $this;
+    }
+
+    /**
+     * Get Customer Data Array.
+     *
+     * @param string $field
+     * @return void
+     */
+    public function getCustomerData(string $field = null)
+    {
+        if (!$field) return $this->customerData;
+
+        return $this->customerData[$field] ?? null;
+    }
+
+    /**
      * Set Invoice MetaData
      *
      * @param  array $metaData Meta Data of Invoice. You will receive the metadata
@@ -141,7 +146,7 @@ class Invoice
      */
     public function setMetaData(array $metaData): Invoice
     {
-        $this->metaData = $metaData;
+        $this->data->metadata = $metaData;
         return $this;
     }
 
@@ -154,7 +159,7 @@ class Invoice
      */
     public function setCustomerId(int $customerId): Invoice
     {
-        $this->customerId = $customerId;
+        $this->data->customer_id = $customerId;
         return $this;
     }
 
@@ -165,7 +170,7 @@ class Invoice
      */
     public function getId(): int
     {
-        return $this->id;
+        return $this->data->id;
     }
 
     /**
@@ -173,9 +178,9 @@ class Invoice
      *
      * @return string
      */
-    public function getCode(): string
+    public function getCode(): ?string
     {
-        return $this->code;
+        return $this->data->code ?? null;
     }
 
     /**
@@ -186,7 +191,7 @@ class Invoice
      */
     public function setId(int $id): Invoice
     {
-        $this->id = $id;
+        $this->data->id = $id;
         return $this;
     }
 
@@ -197,7 +202,7 @@ class Invoice
      */
     public function getAmount(): float
     {
-        return $this->amount;
+        return $this->data->amount;
     }
 
     /**
@@ -208,7 +213,7 @@ class Invoice
      */
     public function __get($name)
     {
-        return $this->payload->$name ?? null;
+        return $this->data->$name ?? null;
     }
 
     /**
@@ -240,12 +245,12 @@ class Invoice
      */
     public function getBody(): array
     {
-        $body = ['amount' => $this->amount * 100];
+        $body = ['amount' => $this->data->amount * 100];
 
-        if ($this->code)  $body['code'] = $this->code;
-        if ($this->metaData) $body['metadata'] = json_encode($this->metaData);
-        if ($this->email) $body['email'] = $this->email;
-        if ($this->customerId) $body['customer_id'] = $this->customerId;
+        if ($this->data->code ?? null)  $body['code'] = $this->data->code;
+        if ($this->data->metadata ?? null) $body['metadata'] = json_encode($this->data->metaData);
+        if ($this->data->email ?? null) $body['email'] = $this->data->email;
+        if ($this->data->customer_id ?? null) $body['customer_id'] = $this->data->customer_id;
 
         if ($this->customerData['first_name'] ?? null) $body['first_name'] = $this->customerData['first_name'];
         if ($this->customerData['middle_name'] ?? null) $body['middle_name'] = $this->customerData['middle_name'];

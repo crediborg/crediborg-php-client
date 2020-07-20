@@ -1,5 +1,5 @@
 {
-    "name": "cynobit/crediborg-php-client",
+    "name": "cynobit/crediborg-client",
     "type": "library",
     "description": "PHP library for consuming CrediBorg APIs",
     "keywords": [
@@ -25,11 +25,17 @@
         "mashape/unirest-php": "3.*"        
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.0"
+        "phpunit/phpunit": "^7.0",
+        "mikecao/flight": "^1.3"
     },
     "autoload": {
         "psr-0": {
-            "CrediBorg": "src/"
+            "CrediBorg\\": "src/"
         }
-    }
+    },
+    "autoload-dev" : {
+		"psr-4" : {
+			"Tests\\" : "tests/"
+		}
+	}
 }

@@ -1,3 +1,5 @@
+![build](https://github.com/crediborg/crediborg-php-client/workflows/build/badge.svg)
+
 # crediborg-php-client #
 
 PHP Client for the CrediBorg Service.
@@ -26,10 +28,12 @@ $invoice = new CrediBorg\Invoice($amount);
 $invoice->setCode('AHYT645623')
     ->setEmail('example@example.com');
     ->setCustomer([
-        'first_name' => 'John',
-        'last_name'  => 'Doe'
+        'first_name'  => 'John',
+        'middle_name' => 'Alfred',
+        'last_name'   => 'Doe'
     ])
     ->setMetaData([
+        // Possible cart items or anything you want.
         'items' => [
             [
                 'name'       => 'Raspberry Pi'
@@ -48,4 +52,23 @@ $crediborg = new CrediBorg\CrediBorg($secret, $token);
 $crediborg->createInvoice($invoice);
 
 echo $invoice->getCode(); // Invoice Code
+```
+
+### Handle Event Payload at Configured WebHook ###
+```php
+$secret = ".....";
+$token = "...";
+
+$crediborg = new CrediBorg\CrediBorg($secret, $token);
+
+$event = $crediborg->getEventPayload();
+
+foreach ($event->getMatchedInvoices() as $invoice) {
+    echo $invoice->code . PHP_EOL;
+    foreach ($invoice->getMatchedTransactions() as $transaction) {
+        echo $transaction->narration . PHP_EOL;
+        echo $transaction->type . PHP_EOL;
+        echo $transaction->amount . PHP_EOL;
+    }
+}
 ```
