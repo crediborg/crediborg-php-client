@@ -8,10 +8,10 @@ CrediBorg is a CREDIT Alert Processing Technology that listens for CREDIT Transa
 
 ## Installation ##
 
-The CrediBorg PHP Client SDK is available on Packagist as cynobit/crediborg-php-client:
+The CrediBorg PHP Client SDK is available on Packagist as cynobit/crediborg-client:
 
 ```php
-$ composer require cynobit/crediborg-php-client
+$ composer require cynobit/crediborg-client
 ```
 
 ## Usage ##
