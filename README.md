@@ -1,4 +1,4 @@
-![build](https://github.com/crediborg/crediborg-php-client/workflows/build/badge.svg) ![Packagist Downloads](https://img.shields.io/packagist/dt/cynobit/crediborg-client?style=flat-square)
+![build](https://github.com/crediborg/crediborg-php-client/workflows/build/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/crediborg/crediborg-php-client/badge.svg?branch=master)](https://coveralls.io/github/crediborg/crediborg-php-client?branch=master) ![Packagist Downloads](https://img.shields.io/packagist/dt/cynobit/crediborg-client?style=flat-square)
 
 # crediborg-php-client #
 
