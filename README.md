@@ -1,4 +1,4 @@
-![build](https://github.com/crediborg/crediborg-php-client/workflows/build/badge.svg)
+![build](https://github.com/crediborg/crediborg-php-client/workflows/build/badge.svg) ![Packagist Downloads](https://img.shields.io/packagist/dt/cynobit/crediborg-client?style=flat-square)
 
 # crediborg-php-client #
 
