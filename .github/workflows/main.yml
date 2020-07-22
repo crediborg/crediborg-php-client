@@ -21,7 +21,6 @@ jobs:
         extensions: mbstring, intl, pdo_mysql, gd, zip, sqlite
         ini-values: post_max_size=256M, short_open_tag=On
         coverage: pcov
-        tools: phpunit:8.2.3
 
     - name: Composer Install Packages.
       run: composer install
