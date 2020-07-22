@@ -13,6 +13,9 @@
             <directory suffix="Test.php">./tests</directory>            
         </testsuite>
     </testsuites>
+    <logging>
+		<log type="coverage-clover" target="./build/logs/clover.xml"/>
+	</logging>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./src</directory>
@@ -22,6 +25,6 @@
         </whitelist>
     </filter>
     <php>
-        <env name="ENV" value="testing" force="true"/>
+        <env name="LIB_ENV" value="testing" force="true"/>
     </php>
 </phpunit>

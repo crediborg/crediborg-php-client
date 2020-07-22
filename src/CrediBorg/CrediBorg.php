@@ -93,7 +93,7 @@ class CrediBorg
      */
     private function endpoint(string $endpoint): string
     {
-        return (getenv('ENV') == 'testing' ?
+        return (getenv('LIB_ENV') == 'testing' ?
             'http://localhost:9540/' : 'https://api.cynobit.com/crediborg/v1/')
             . $endpoint;
     }

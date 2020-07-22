@@ -25,3 +25,18 @@ jobs:
 
     - name: Composer Install Packages.
       run: composer install
+
+    - name: Run Unit Tests      
+      run: bash ./run_tests.sh
+    
+    - name: Composer Install PHP-Coverall
+      run: composer require cedx/coveralls
+
+    - uses: nick-invision/retry@v1
+      env:
+        COVERALLS_SERVICE_NAME: GitHub Actions
+        COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        timeout_minutes: 3
+        max_attempts: 3
+        command: php vendor/bin/coveralls ./build/logs/clover.xml
