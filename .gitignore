@@ -3,3 +3,4 @@
 /.env
 /tests/test.php
 tests/server/error_logs
+build/logs/clover.xml
