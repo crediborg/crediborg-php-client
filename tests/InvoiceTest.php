@@ -3,14 +3,19 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use CrediBorg\Invoice;
+use CrediBorg\Resources\Invoice;
 use CrediBorg\CrediBorg;
 use PHPUnit\Framework\TestCase;
 
 
 final class InvoiceTest extends TestCase
 {
-    public function testClientSetFields(): void
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function testCanCreateInvoiceAndSetClientFields(): void
     {
         $invoice = new Invoice(5000);
 
@@ -21,5 +26,6 @@ final class InvoiceTest extends TestCase
         $crediborg->createInvoice($invoice);
 
         $this->assertEquals('STUB_GENERATED', $invoice->getCode());
+        $this->assertEquals(5000, $invoice->getAmount());
     }
 }

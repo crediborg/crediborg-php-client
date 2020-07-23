@@ -1,6 +1,6 @@
 <?php
 
-namespace CrediBorg;
+namespace CrediBorg\Resources;
 
 class Transaction
 {

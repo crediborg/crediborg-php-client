@@ -15,7 +15,7 @@ Go to <a href="http://crediborg.cynobit-app.com/developers/doc" target="_blank"/
 The CrediBorg PHP Client SDK is available on Packagist as cynobit/crediborg-client:
 
 ```php
-$ composer require cynobit/crediborg-client
+$ composer require cynobit/crediborg-client:dev-master
 ```
 
 ## Usage ##

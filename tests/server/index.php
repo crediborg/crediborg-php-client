@@ -31,6 +31,14 @@ class CrediBorgServerStub
         Flight::json(null, 500);
     }
 
+    public function returnRequestBody():void
+    {
+        if (!$this->authenticate()) {
+            Flight::json(null, 401);
+            return;
+        } 
+    }
+
     /**
      * Authenticate
      *
@@ -73,6 +81,7 @@ Flight::route('/', function () {
 });
 
 Flight::route('POST /invoices', [$stub, 'checkInvoice']);
+Flight::route('GET /stub/webhook', [$stub, 'getInvoices']);
 
 /**
  * Configurations
