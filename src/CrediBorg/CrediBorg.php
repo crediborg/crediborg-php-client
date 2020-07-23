@@ -5,7 +5,8 @@ namespace CrediBorg;
 use Exception;
 use Unirest\Request;
 use Unirest\Request\Body;
-use CrediBorg\EventPayload;
+use CrediBorg\Resources\Invoice;
+use CrediBorg\Resources\EventPayload;
 use CrediBorg\Exceptions\ValidationException;
 
 class CrediBorg
